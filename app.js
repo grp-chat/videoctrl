@@ -18,3 +18,11 @@ const io = socketio(server);
 server.listen(PORT);
 console.log("Server listening at " + PORT);
 
+io.sockets.on('connection', (sock) => {
+
+    sock.on('btnpress', () => {
+        console.log("Button pressed");
+        io.emit('jumpVideo');
+    });
+
+});
