@@ -1,7 +1,12 @@
 const sock = io();
 
+var ua = navigator.userAgent.toLowerCase();
+var isAndroid = ua.indexOf("android") > -1; //&& ua.indexOf("mobile");
 
-const myvideo = document.getElementsByTagName('video')
+
+
+const myvideo = document.getElementsByTagName('video');
+const jumpVideo = document.getElementById('video1');
 
 
 const button1 = document.createElement("button");
@@ -10,6 +15,10 @@ button1.style.width = "100px";
 button1.style.height = "50px";
 button1.style.display = "block";
 button1.style.margin = "auto";
+button1.style.backgroundColor = "black";
+button1.style.border = "none";
+// button1.style.borderColor = "black";
+// button1.style.borderWidth = "0.1px";
 
 button1.addEventListener("click", (e)=> {
     e.preventDefault;
@@ -25,7 +34,7 @@ function toggleVideo() {
     }
   }
 
-  function setupVideo () {
+function setupVideo () {
     // get video
       var video = document.getElementById('video1')
       // Play the video, this is optional
@@ -37,11 +46,41 @@ function toggleVideo() {
       })
     }
 
-    setupVideo();
+setupVideo();
+
+if(isAndroid) {
+
+    const img = document.getElementsByClassName("imgcenter");
+    img[0].style.display = "none";
+    myvideo[0].style.display = "none";
+
+    button1.style.width = "500px";
+    button1.style.height = "800px";
+    button1.style.backgroundColor = "black";
+    button1.style.borderColor = "grey";
+    button1.style.borderWidth = "0.5px";
+
+    
+
+  };
 
 sock.on('jumpVideo', () => {
-    myvideo[0].currentTime = 66;
-    myvideo[0].play();
+
+    if(isAndroid) {return};
+
+    myvideo[0].style.display = "none";
+    myvideo[0].pause();
+    
+    // 
+    jumpVideo.style.display = "block";
+    jumpVideo.play();
+
+    setTimeout(() => {
+        myvideo[0].currentTime = 0;
+        jumpVideo.style.display = "none";
+        myvideo[0].style.display = "block";
+    }, 4800);
+    
 });
 
 
