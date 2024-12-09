@@ -57,16 +57,17 @@ if(isAndroid) {
     button1.style.width = "500px";
     button1.style.height = "800px";
     button1.style.backgroundColor = "black";
-    button1.style.borderColor = "grey";
-    button1.style.borderWidth = "0.5px";
-
-    
-
+    button1.style.borderStyle = "dotted";
+    button1.style.borderColor = "indigo";
+    button1.style.borderWidth = "0.1px";
   };
 
 sock.on('jumpVideo', () => {
 
     if(isAndroid) {return};
+    if(myvideo[0].currentTime === 0){alert ("AI standing by... Awaiting Game Start" ); return;};
+    if(myvideo[0].paused && !myvideo[0].ended){alert ("AI standing by... Awaiting Game Start"); return};
+    // if(myvideo[0].readyState < 2){return};
 
     myvideo[0].style.display = "none";
     myvideo[0].pause();
