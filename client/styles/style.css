@@ -44,7 +44,7 @@ body {
 }
 
 #temp {
-  left: 50%;
+    left: 50%;
     position: absolute;
     top: 50%;
     transform: translate(-50%, -50%);
@@ -52,5 +52,11 @@ body {
 
 #video1 {
   display: none;
+}
+
+#text {
+    left: 10%;
+    position: absolute;
+    top: 10%;
 }
 

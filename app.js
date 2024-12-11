@@ -21,8 +21,13 @@ console.log("Server listening at " + PORT);
 io.sockets.on('connection', (sock) => {
 
     sock.on('btnpress', () => {
-        console.log("Button pressed");
+        // console.log("Button pressed");
         io.emit('jumpVideo');
+    });
+
+    sock.on('btnpress2', () => {
+        // console.log("Button 2 pressed");
+        io.emit('toggleText');
     });
 
 });
