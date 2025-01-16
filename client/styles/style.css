@@ -58,5 +58,6 @@ body {
     left: 10%;
     position: absolute;
     top: 10%;
+    display: none;
 }
 

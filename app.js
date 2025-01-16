@@ -30,4 +30,8 @@ io.sockets.on('connection', (sock) => {
         io.emit('toggleText');
     });
 
+    sock.on('checkConnection', ()=>{
+        io.emit('showText');
+    });
+
 });
