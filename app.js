@@ -34,4 +34,9 @@ io.sockets.on('connection', (sock) => {
         io.emit('showText');
     });
 
+    sock.on('androidFullScreen', () => {
+        console.log("clicked on p")
+        io.emit('goFullScreen');
+    });
+
 });

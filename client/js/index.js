@@ -11,8 +11,11 @@ const jumpVideo = document.getElementById('video1');
 
 const button1 = document.createElement("button");
 document.body.appendChild(button1);
-// const button2 = document.createElement("button");
-// document.body.appendChild(button2);
+
+const button2 = document.createElement("button");
+document.body.appendChild(button2);
+button2.style.backgroundColor = "black";
+
 button1.style.width = "100px";
 button1.style.height = "50px";
 button1.style.display = "block";
@@ -24,13 +27,17 @@ button1.style.border = "none";
 
 button1.addEventListener("click", (e)=> {
     e.preventDefault;
-    sock.emit('btnpress')
+    sock.emit('btnpress');
+    if (isAndroid) openFullscreen();
 }, false);
 
-// button2.addEventListener("click", (e)=> {
-//   e.preventDefault;
-//   sock.emit('btnpress2')
-// }, false);
+button2.addEventListener("click", (e)=> {
+  e.preventDefault;
+  if (isAndroid) {
+    openFullscreen(); 
+    button1.style.height = "600px";
+  }
+}, false);
 
 function toggleVideo() {
     var x = document.getElementById("video1");
@@ -72,10 +79,21 @@ function setupVideo () {
       })
     }
 
+function openFullscreen() {
+  const elem = document.documentElement; // entire page
+  if (elem.requestFullscreen) {
+    elem.requestFullscreen();
+  } else if (elem.webkitRequestFullscreen) { // Safari
+    elem.webkitRequestFullscreen();
+  } else if (elem.msRequestFullscreen) { // older browsers
+    elem.msRequestFullscreen();
+  }
+}
+
 setupVideo();
 
 if(isAndroid) {
-
+    
     const img = document.getElementsByClassName("imgcenter");
     img[0].style.display = "none";
     myvideo[0].style.display = "none";
@@ -83,18 +101,18 @@ if(isAndroid) {
     textElement.style.display = "none";
 
     button1.style.width = "500px";
-    button1.style.height = "600px";
+    button1.style.height = "500px";
     button1.style.backgroundColor = "black";
     button1.style.borderStyle = "dotted";
     button1.style.borderColor = "indigo";
     button1.style.borderWidth = "0.1px";
     
-    // button2.style.width = "500px";
-    // button2.style.height = "300px";
-    // button2.style.backgroundColor = "black";
-    // button2.style.borderStyle = "dotted";
-    // button2.style.borderColor = "indigo";
-    // button2.style.borderWidth = "0.1px";
+    button2.style.width = "500px";
+    button2.style.height = "300px";
+    button2.style.backgroundColor = "black";
+    button2.style.borderStyle = "dotted";
+    button2.style.borderColor = "indigo";
+    button2.style.borderWidth = "0.1px";
 
     setInterval(() => {
 
@@ -138,6 +156,13 @@ sock.on('showText', ()=>{
   if(isAndroid) {return};
   blinkParagraph();
 
+});
+
+sock.on('goFullScreen', () => {
+  if (isAndroid) {
+    alert("click");
+    openFullscreen();
+  }
 });
 
 
